@@ -2,20 +2,12 @@ pipeline{
     agent any
     stages{
         stage('Build'){
-            steps{
-                sh 'mvn clean install'
+           git url: 'https://github.com/IvanTovarOnofre/Jenkins-Spring.git'
+            withMaven {
+                sh "mvn clean verify"
             }
         }
-        stage('Test'){
-            steps{
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy'){
-            steps{
-                echo "Simulando un despliegue"
-            }
-        }
+
     }
 
     post{
