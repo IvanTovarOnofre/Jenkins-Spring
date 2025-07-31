@@ -3,24 +3,30 @@ pipeline{
     stages{
         stage('Build'){
             steps {
-                git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
-                withMaven {
-                    sh "mvn clean verify"
-                } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
+                sh 'mvn clean install'
             }
         }
-
+        stage('Build'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Build'){
+           steps {
+                echo 'Desplegando...'
+           }
+        }
     }
 
     post{
         always{
-            echo 'Simpre'
+            echo 'Siempre'
         }
         success{
             echo "Exito"
         }
         failure{
-            echo "Falla"
+            echo "Fallo"
         }
     }
 }
