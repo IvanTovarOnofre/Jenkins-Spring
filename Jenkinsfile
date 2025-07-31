@@ -6,21 +6,23 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Build'){
+
+        stage('Test'){
             steps {
                 sh 'mvn test'
             }
         }
-        stage('Build'){
+
+        stage('Deploy'){
            steps {
-                echo 'Desplegando...'
+                echo "Desplegando..."
            }
         }
     }
 
     post{
         always{
-            echo 'Siempre'
+            echo "Siempre"
         }
         success{
             echo "Exito"
